@@ -1,0 +1,75 @@
+version: '2'
+
+services:
+    application:
+        container_name: g2bot_application
+        image: debian
+        volumes:
+            - ./:/var/www/laravel
+    workspace:
+        container_name: g2bot_workspace
+        image: framgia/laravel-workspace
+        volumes_from:
+            - application
+        tty: true
+    php-fpm:
+        container_name: g2bot_php-fpm
+        restart: always
+        image: framgia/laravel-php-fpm
+        volumes_from:
+            - application
+        expose:
+            - "9000"
+        links:
+            - workspace
+    nginx:
+        container_name: g2bot_nginx
+        restart: always
+        image: framgia/laravel-nginx
+        volumes_from:
+            - data
+            - logs
+            - application
+        ports:
+            - "2019:80"
+        links:
+            - php-fpm
+    data:
+        container_name: g2bot_data
+        image: debian
+        volumes:
+            - .docker/mysql:/var/lib/mysql
+            - .docker/data:/data
+    logs:
+        container_name: g2bot_logs
+        image: debian
+        volumes:
+            - .docker/logs/nginx:/var/log/nginx
+            - .docker/logs/mongodb:/var/log/mongodb
+    mysql:
+        container_name: g2bot_mysql
+        restart: always
+        image: mysql:5.7
+        volumes_from:
+            - data
+            - logs
+        expose:
+            - "3306"
+        environment:
+            MYSQL_DATABASE: g2bot
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+    phpmyadmin:
+        container_name: g2bot_phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_ARBITRARY: 1
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "2021:80"
+        links:
+            - "mysql:mysql"
+
