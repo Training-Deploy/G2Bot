@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'account_id'
     ];
 
     /**
@@ -36,4 +36,43 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     *  Get the members for the user 
+     */
+    public function members()
+    {
+        return $this->hasMany('App\Member');
+    }
+
+    /**
+     *  Get the excels for the user 
+     */
+    public function excels()
+    {
+        return $this->hasMany('App\Excel');
+    }
+
+    /**
+     *  The bots that belong to the user.
+     */
+    public function bots()
+    {
+        return $this->belongsToMany('App\Bot');
+    }
+
+    /**
+     *  Get the messages for the user
+     */
+    public function messages()
+    {
+        return $this->hasManyThrough(
+            'App\Message',
+            'App\BotUser',
+            'user_id',
+            'bot_user_id',
+            'id',
+            'id'
+        );
+    }
 }
