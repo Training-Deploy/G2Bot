@@ -10,7 +10,12 @@
                 <div class="md:w-full md:flex">
                     <ul></ul>
                     <ul>
-                        <li><a href="#" title="Log in and get your Vue.js learning on!">Login</a></li>
+                    @if(Auth::user())
+                        <li><a href="#">{{ Auth::user()->name }} </a></li>
+                        <li><a href="{{ route('logout-client') }}">Logout</a></li>
+                    @else
+                        <li><a href="{{ route('login-client') }}">Login</a></li>
+                    @endif
                     </ul>
                 </div>
             </div>

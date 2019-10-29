@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Repositories\User\UserEloquentRepository;
 
 class LoginController extends Controller
 {
@@ -27,13 +29,37 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
+    protected $userRepository;
+
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
-    public function __construct()
+    public function __construct(UserEloquentRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the Gmail authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Gmail.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        if ($this->userRepository->handleLoginCallBack($googleUser)) {
+            return redirect()->route('home');
+        }
     }
 }
