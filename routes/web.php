@@ -13,4 +13,13 @@
 
 Route::get('/', function () {
     return view('clients.master');
-});
+})->name('home');
+
+Route::get('login/email', 'Auth\LoginController@redirectToProvider')->name('login-client');
+Route::get('login/email/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/logout', function () {
+   Auth::logout();
+
+   return redirect()->route('home');
+})->name('logout-client');
