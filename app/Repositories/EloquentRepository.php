@@ -9,7 +9,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    protected $_model;
+    protected $model;
 
     /**
      * EloquentRepository constructor.
@@ -30,7 +30,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function setModel()
     {
-        $this->_model = app()->make(
+        $this->model = app()->make(
             $this->getModel()
         );
     }
@@ -41,7 +41,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function getAll()
     {
-        return $this->_model->all();
+        return $this->model->all();
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        $result = $this->_model->find($id);
+        $result = $this->model->find($id);
 
         return $result;
     }
@@ -63,7 +63,7 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function create(array $attributes)
     {
-        return $this->_model->create($attributes);
+        return $this->model->create($attributes);
     }
 
     /**
@@ -100,5 +100,4 @@ abstract class EloquentRepository implements RepositoryInterface
 
         return false;
     }
-
 }

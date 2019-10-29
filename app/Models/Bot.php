@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Bot extends Model
 {
-    protected $table = "bots";
+    protected $table = 'bots';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,8 @@ class Bot extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'api_key'
+        'user_id',
+        'api_key',
     ];
 
     /**
@@ -22,7 +23,7 @@ class Bot extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Models\User');
     }
 
     /**
@@ -31,8 +32,8 @@ class Bot extends Model
     public function messages()
     {
         return $this->hasManyThrough(
-            'App\Message',
-            'App\BotUser',
+            'App\Models\Message',
+            'App\Models\BotUser',
             'bot_id',
             'user_bot_id',
             'id',

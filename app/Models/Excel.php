@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Excel extends Model
 {
-    protected $table = "excels";
+    protected $table = 'excels';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,9 @@ class Excel extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'link', 'user_id'
+        'name',
+        'link',
+        'user_id',
     ];
 
     /**
@@ -22,6 +24,6 @@ class Excel extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

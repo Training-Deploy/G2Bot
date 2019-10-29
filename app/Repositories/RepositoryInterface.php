@@ -1,7 +1,8 @@
 <?php
 namespace App\Repositories;
 
-interface RepositoryInterface {
+interface RepositoryInterface
+{
     /**
      * Get All
      *
@@ -39,6 +40,6 @@ interface RepositoryInterface {
     *
     * @param integer $id
     * @return void
-    */ 
+    */
     public function delete($id);
 }

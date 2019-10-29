@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $table = "rooms";
+    protected $table = 'rooms';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,9 @@ class Room extends Model
      * @var array
      */
     protected $fillable = [
-        'room_name', 'room_id', 'bot_id'
+        'room_name',
+        'room_id',
+        'bot_id',
     ];
 
     /**
@@ -22,7 +24,7 @@ class Room extends Model
      */
     public function bot()
     {
-        return $this->belongsTo('App\Bot');
+        return $this->belongsTo('App\Models\Bot');
     }
 
     /**
@@ -30,6 +32,6 @@ class Room extends Model
      */
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\Models\Message');
     }
 }

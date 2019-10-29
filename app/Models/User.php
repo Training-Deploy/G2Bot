@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +16,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'account_id'
+        'name',
+        'email',
+        'password',
+        'account_id',
     ];
 
     /**
@@ -25,7 +28,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -38,19 +42,19 @@ class User extends Authenticatable
     ];
 
     /**
-     *  Get the members for the user 
+     *  Get the members for the user
      */
     public function members()
     {
-        return $this->hasMany('App\Member');
+        return $this->hasMany('App\Models\Member');
     }
 
     /**
-     *  Get the excels for the user 
+     *  Get the excels for the user
      */
     public function excels()
     {
-        return $this->hasMany('App\Excel');
+        return $this->hasMany('App\Models\Excel');
     }
 
     /**
@@ -58,7 +62,7 @@ class User extends Authenticatable
      */
     public function bots()
     {
-        return $this->belongsToMany('App\Bot');
+        return $this->belongsToMany('App\Models\Bot');
     }
 
     /**
@@ -67,8 +71,8 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasManyThrough(
-            'App\Message',
-            'App\BotUser',
+            'App\Models\Message',
+            'App\Models\BotUser',
             'user_id',
             'bot_user_id',
             'id',
