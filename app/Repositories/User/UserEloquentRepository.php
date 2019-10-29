@@ -14,5 +14,4 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     {
         return \App\User::class;
     }
-    
 }

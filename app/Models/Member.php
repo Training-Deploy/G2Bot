@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    protected $table = "members";
+    protected $table = 'members';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Member extends Model
         'chatwork_account',
         'company_email',
         'ssh_key',
-        'user_id'
+        'user_id',
     ];
     
     /**
@@ -31,6 +31,6 @@ class Member extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

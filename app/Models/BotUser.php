@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class BotUser extends Pivot
 {
-    protected $table = "bot_user";
+    protected $table = 'bot_user';
 }

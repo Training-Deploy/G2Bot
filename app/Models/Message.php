@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $table = "messages";
+    protected $table = 'messages';
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +27,8 @@ class Message extends Model
     public function bot()
     {
         return $this->hasOneThrough(
-            'App\Bot',
-            'App\BotUser',
+            'App\Models\Bot',
+            'App\Models\BotUser',
             'id',
             'id',
             'bot_user_id',
@@ -42,8 +42,8 @@ class Message extends Model
     public function user()
     {
         return $this->hasOneThrough(
-            'App\User',
-            'App\BotUser',
+            'App\Models\User',
+            'App\Models\BotUser',
             'id',
             'id',
             'bot_user_id',
@@ -56,6 +56,6 @@ class Message extends Model
      */
     public function room()
     {
-        return $this->belongsTo('App\Room');
+        return $this->belongsTo('App\Models\Room');
     }
 }
