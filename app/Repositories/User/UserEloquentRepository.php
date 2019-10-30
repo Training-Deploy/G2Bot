@@ -10,7 +10,7 @@ use App\Repositories\EloquentRepository;
 class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface
 {
     /**
-     * get model.
+     * Get model.
      *
      * @return string
      */
@@ -23,6 +23,8 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
      * Handle login callback with google.
      *
      * @param mixed $googleUser
+     *
+     * @return void
      */
     public function handleLoginCallBack($googleUser)
     {
@@ -37,11 +39,12 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
             $user = $this->model->whereEmail($email)->first();
 
             if (!$user) {
-                $user = $this->_model::create([
+                $user = $this->model::create([
                     'email' => $email,
                     'name' => $googleUser->getName(),
                     'password' => bcrypt($googleUser->getName()),
-                    ]);
+                ]);
+
                 $socialAccount->user()->associate($user);
                 $socialAccount->save();
             }

@@ -25,14 +25,12 @@
         <div class="w-full flex flex-wrap px-4 z-10">
             <div class="w-full lg:w-3/5 flex flex-wrap justify-center flex-col">
                 <div class="md:mt-10 md:mr-16 md:pr-8">
-                    <form class="express-enroll">
-                        <div data-v-3a588ebc="" class="md:bg-white rounded flex flex-wrap md:flex-no-wrap md:p-1 mt-6 relative">
-                            <input data-v-3a588ebc="" type="email" placeholder="API Key" class="rounded bg-white flex-grow outline-none p-4 md:py-0 font-medium tracking-wide text-purple"> <!----> 
-                            <button data-v-3a588ebc="" class="btn md:btn-lg btn-green-gradient flex items-center p-4 mt-2 md:mt-0 w-full md:w-auto justify-center">
-                                <span data-v-3a588ebc="">Start</span> <!---->
-                            </button>
-                        </div>
-                    </form>
+                    <div class="md:bg-white rounded flex flex-wrap md:flex-no-wrap md:p-1 mt-6 relative">
+                        <input type="text" placeholder="API Key" v-model="apiKey" class="rounded bg-white flex-grow outline-none p-4 md:py-0 font-medium tracking-wide text-purple"> <!---->
+                        <button v-on:click="getBotsInfor()" class="btn md:btn-lg btn-green-gradient flex items-center p-4 mt-2 md:mt-0 w-full md:w-auto justify-center">
+                            <span>Start</span> <!---->
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
