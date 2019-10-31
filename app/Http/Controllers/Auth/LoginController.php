@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Repositories\User\UserEloquentRepository;
+use App\Repositories\User\UserRepositoryInterface;
 
 class LoginController extends Controller
 {
@@ -34,7 +34,7 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct(UserEloquentRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
         $this->middleware('guest')->except('logout');

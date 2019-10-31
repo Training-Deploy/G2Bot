@@ -1,5 +1,8 @@
 /*!normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css*/
 
+[v-cloak] > * { display:none; }
+[v-cloak]::before { content: "loading..."; }
+
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -4221,7 +4224,7 @@ hr {
         height: 4rem
     }
     .lg\:h-32 {
-        height: 8rem
+        height: 4rem
     }
     .lg\:h-48 {
         height: 12rem
@@ -4412,7 +4415,7 @@ hr {
         width: 4rem
     }
     .lg\:w-64 {
-        width: 16rem
+        width: 4rem
     }
     .lg\:w-96 {
         width: 24rem

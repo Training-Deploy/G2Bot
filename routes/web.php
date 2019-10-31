@@ -19,7 +19,12 @@ Route::get('login/email', 'Auth\LoginController@redirectToProvider')->name('logi
 Route::get('login/email/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/logout', function () {
-   Auth::logout();
+    Auth::logout();
 
-   return redirect()->route('home');
+    return redirect()->route('home');
 })->name('logout-client');
+
+
+Route::group(['prefix' => '/', 'namespace' => 'Client'], function () {
+    Route::resource('bots', 'BotController', ['except' => ['create', 'edit', 'destroy']]);
+});

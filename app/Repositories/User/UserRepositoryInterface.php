@@ -7,7 +7,9 @@ interface UserRepositoryInterface
     /**
      * Handle login callback with google.
      *
-     * @param mixed $googleUser
+     * @param mixed $googleUser //
+     *
+     * @return void
      */
     public function handleLoginCallBack($googleUser);
 }
