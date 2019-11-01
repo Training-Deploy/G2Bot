@@ -51,7 +51,11 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        $result = $this->model->find($id);
+        if (is_numeric($id)) {
+            $result = $this->model->find($id);
+        } else {
+            $result = $this->model->where('full_name', '=', $id)->first();
+        }
 
         return $result;
     }

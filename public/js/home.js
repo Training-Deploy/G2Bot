@@ -5,6 +5,11 @@ var home = new Vue({
     el: '#app',
     mixins: [mixin],
     data: {
+        title: 'Upload File Excel',
+        status: null,
+        file: '',
+        sheetName: 'MemberInfo',
+        fileName: 'Choose File',
         apiKey: null,
         formErrors: null,
         bots: {
@@ -13,7 +18,6 @@ var home = new Vue({
         },
         auth: window.data.auth
     },
-
     methods: {
         getBotsInfor() {
             if (!this.auth) {
@@ -41,6 +45,50 @@ var home = new Vue({
             }).catch((error) => {
                 self.formErrors = this.handleError(error);
             });
-        }
+        },
+        onFileChange(event) {
+            this.file = event.target.files[0]
+            this.fileName = this.file.name
+        },
+        attachmentCreate() {
+            if (!this.auth) {
+                toastr.warning('Please Login', 'Warning');
+
+                return;
+            }
+
+            var form = new FormData();
+            var self = this;
+            form.append('file', this.file);
+            form.append('sheet', this.sheetName);
+            axios.post(self.url_upload_excel, form)
+            .then(response => {
+                this.displayDataSuccess(response)
+                $('#list-members').DataTable().ajax.reload();
+            })
+            .catch(error => {
+                this.displayAlertError(error)
+            })
+        },
     },
 });
+
+$(document).ready(function () {
+    if (window.data.auth) {
+        $('#list-members').DataTable({
+            "aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+            "iDisplayLength": 10,
+            "process": true,
+            "serverSide": false,
+            "ajax": 'members',
+            "columns": [
+                { data:'full_name' },
+                { data:'birthday' },
+                { data:'company_email' },
+                { data:'action' },
+            ],
+        })
+    }
+})
+
+

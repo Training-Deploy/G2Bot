@@ -26,8 +26,8 @@
             <div class="w-full lg:w-3/5 flex flex-wrap justify-center flex-col">
                 <div class="md:mt-10 md:mr-16 md:pr-8">
                     <div class="md:bg-white rounded flex flex-wrap md:flex-no-wrap md:p-1 mt-6 relative">
-                        <input type="text" placeholder="API Key" v-model="apiKey" class="rounded bg-white flex-grow outline-none p-4 md:py-0 font-medium tracking-wide text-purple"> <!---->
-                        <button v-on:click="getBotsInfor()" class="btn md:btn-lg btn-green-gradient flex items-center p-4 mt-2 md:mt-0 w-full md:w-auto justify-center">
+                        <input type="text" placeholder="API Key" v-model="apiKey" class="l-h rounded bg-white flex-grow outline-none p-4-template md:py-0 font-medium tracking-wide text-purple"> <!---->
+                        <button v-on:click="getBotsInfor()" class="btnmain md:btnmain-lg btnmain-green-gradient flex items-center p-4-template mt-2 md:mt-0 w-full md:w-auto justify-center">
                             <span>Start</span> <!---->
                         </button>
                     </div>

@@ -44,7 +44,6 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
                     'name' => $googleUser->getName(),
                     'password' => bcrypt($googleUser->getName()),
                 ]);
-
                 $socialAccount->user()->associate($user);
                 $socialAccount->save();
             }
