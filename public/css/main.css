@@ -275,7 +275,7 @@ ul {
 }
 
 [tabindex="-1"]:focus {
-    outline: none!important
+    outline: none !important
 }
 
 *,
@@ -407,6 +407,7 @@ nav a:hover {
         display: flex;
         margin: 0
     }
+
     .nav-content ul:last-of-type {
         justify-content: flex-end
     }
@@ -437,6 +438,7 @@ nav a:hover {
     .nav-content li a {
         padding: 0
     }
+
     .nav-content li a:hover {
         border-color: #766b93
     }
@@ -491,7 +493,7 @@ nav a:hover {
     color: #766b93
 }
 
-.btn {
+.btnmain {
     align-items: center;
     border-radius: .25rem;
     box-shadow: 0 4px 6px rgba(34, 19, 107, .15);
@@ -508,49 +510,49 @@ nav a:hover {
     transition-property: background
 }
 
-.btn>i {
+.btnmain>i {
     margin-right: .25rem
 }
 
-.btn:disabled {
+.btnmain:disabled {
     opacity: .5
 }
 
-.btn:hover {
+.btnmain:hover {
     color: #fff;
     text-decoration: none
 }
 
-.btn-lg {
+.btnmain-lg {
     padding: 1rem 2rem
 }
 
-.btn-lg>i {
+.btnmain-lg>i {
     margin-right: .75rem
 }
 
-.btn-block {
+.btnmain-block {
     display: block;
     width: 100%
 }
 
-.btn-green-gradient {
+.btnmain-green-gradient {
     background: linear-gradient(.31deg, #3cac8a .7%, #5cceac 99.3%);
     color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, .25)
 }
 
-.btn-green-gradient:hover {
+.btnmain-green-gradient:hover {
     background: linear-gradient(.31deg, #3cac8a 20.7%, #5cceac 99.3%)
 }
 
-.btn-green-outlined {
+.btnmain-green-outlined {
     box-shadow: 0 0;
     box-shadow: inset 0 0 0 2px #5cceac;
     color: #5cceac
 }
 
-.btn-green-outlined:hover {
+.btnmain-green-outlined:hover {
     box-shadow: inset 0 0 0 2px #3cac8a;
     color: #3cac8a
 }
@@ -640,6 +642,7 @@ table.table td:before {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg)
     }
+
     to {
         -webkit-transform: rotate(1turn);
         transform: rotate(1turn)
@@ -697,7 +700,7 @@ table.table td:before {
     color: #fff
 }
 
-.vs-modal .btn-primary {
+.vs-modal .btnmain-primary {
     background-image: linear-gradient(90deg, #6d5982 1%, #29216c);
     background-position: 0;
     background-repeat: no-repeat;
@@ -708,12 +711,12 @@ table.table td:before {
     transition: all .3s ease-in-out
 }
 
-.vs-modal .btn-primary:hover {
+.vs-modal .btnmain-primary:hover {
     color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, .5)
 }
 
-.vs-modal .btn-primary:disabled {
+.vs-modal .btnmain-primary:disabled {
     background-image: linear-gradient(-180deg, #eee, #d8d8d8);
     box-shadow: none;
     color: rgba(64, 64, 64, .7);
@@ -721,7 +724,7 @@ table.table td:before {
     font-weight: 700
 }
 
-.vs-modal .btn-primary:disabled:hover {
+.vs-modal .btnmain-primary:disabled:hover {
     -webkit-animation-duration: 1s;
     -webkit-animation-name: shake;
     animation-duration: 1s;
@@ -791,10 +794,12 @@ table.table td:before {
 }
 
 @-webkit-keyframes shake {
+
     0%,
     to {
         -webkit-transform: translateX(0)
     }
+
     10%,
     30%,
     50%,
@@ -802,6 +807,7 @@ table.table td:before {
     90% {
         -webkit-transform: translateX(-10px)
     }
+
     20%,
     40%,
     60%,
@@ -811,11 +817,13 @@ table.table td:before {
 }
 
 @keyframes shake {
+
     0%,
     to {
         -webkit-transform: translateX(0);
         transform: translateX(0)
     }
+
     10%,
     30%,
     50%,
@@ -824,6 +832,7 @@ table.table td:before {
         -webkit-transform: translateX(-10px);
         transform: translateX(-10px)
     }
+
     20%,
     40%,
     60%,
@@ -877,6 +886,7 @@ table.table td:before {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg)
     }
+
     to {
         -webkit-transform: rotate(1turn);
         transform: rotate(1turn)
@@ -1668,6 +1678,7 @@ table.table td:before {
     .video-controls ul li {
         padding: 15px 5px
     }
+
     .video-controls ul li>.label {
         display: inline-block
     }
@@ -2904,7 +2915,7 @@ table.table td:before {
     padding: .75rem
 }
 
-.p-4 {
+.p-4-template {
     padding: 1rem
 }
 
@@ -3625,7 +3636,7 @@ table.table td:before {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-family: Rubik, sans-serif;
-    outline: 0!important
+    outline: 0 !important
 }
 
 body {
@@ -3691,7 +3702,7 @@ section>.title {
 
 @media(min-width:992px) {
     .quote-wrapper {
-        background: 0 0!important;
+        background: 0 0 !important;
         box-shadow: none;
         margin: 0;
         padding: 0
@@ -3722,7 +3733,7 @@ hr {
 
 @media screen and (max-width:767px) {
     #course-container[style] {
-        background-image: none!important
+        background-image: none !important
     }
 }
 
@@ -3796,384 +3807,503 @@ hr {
     .md\:btn-lg {
         padding: 1rem 2rem
     }
+
     .md\:btn-lg>i {
         margin-right: .75rem
     }
+
     .md\:bg-transparent {
         background-color: transparent
     }
+
     .md\:bg-white {
         background-color: #fff
     }
+
     .md\:border-pale-blue {
         border-color: #667dff
     }
+
     .md\:rounded-r {
         border-top-right-radius: .25rem
     }
+
     .md\:rounded-r {
         border-bottom-right-radius: .25rem
     }
+
     .md\:rounded-t-lg {
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem
     }
+
     .md\:rounded-r-lg {
         border-bottom-right-radius: .5rem;
         border-top-right-radius: .5rem
     }
+
     .md\:rounded-b-lg {
         border-bottom-left-radius: .5rem;
         border-bottom-right-radius: .5rem
     }
+
     .md\:rounded-l-lg {
         border-bottom-left-radius: .5rem;
         border-top-left-radius: .5rem
     }
+
     .md\:rounded-tr-none {
         border-top-right-radius: 0
     }
+
     .md\:border-0 {
         border-width: 0
     }
+
     .md\:border-r {
         border-right-width: 1px
     }
+
     .md\:block {
         display: block
     }
+
     .md\:inline-block {
         display: inline-block
     }
+
     .md\:inline {
         display: inline
     }
+
     .md\:hidden {
         display: none
     }
+
     .md\:flex {
         display: flex
     }
+
     .md\:flex-row {
         flex-direction: row
     }
+
     .md\:flex-col {
         flex-direction: column
     }
+
     .md\:flex-no-wrap {
         flex-wrap: nowrap
     }
+
     .md\:items-center {
         align-items: center
     }
+
     .md\:justify-start {
         justify-content: flex-start
     }
+
     .md\:justify-end {
         justify-content: flex-end
     }
+
     .md\:justify-between {
         justify-content: space-between
     }
+
     .md\:justify-around {
         justify-content: space-around
     }
+
     .md\:font-light {
         font-weight: 300
     }
+
     .md\:font-normal {
         font-weight: 400
     }
+
     .md\:font-medium {
         font-weight: 500
     }
+
     .md\:h-44 {
         height: 11rem
     }
+
     .md\:h-auto {
         height: auto
     }
+
     .md\:leading-normal {
         line-height: 1.5
     }
+
     .md\:m-0 {
         margin: 0
     }
+
     .md\:my-2 {
         margin-bottom: .5rem;
         margin-top: .5rem
     }
+
     .md\:my-4 {
         margin-bottom: 1rem;
         margin-top: 1rem
     }
+
     .md\:mx-4 {
         margin-left: 1rem;
         margin-right: 1rem
     }
+
     .md\:my-8 {
         margin-bottom: 2rem;
         margin-top: 2rem
     }
+
     .md\:my-16 {
         margin-bottom: 4rem;
         margin-top: 4rem
     }
+
     .md\:my-auto {
         margin-bottom: auto;
         margin-top: auto
     }
+
     .md\:mx-auto {
         margin-left: auto;
         margin-right: auto
     }
+
     .md\:mt-0 {
         margin-top: 0
     }
+
     .md\:mb-0 {
         margin-bottom: 0
     }
+
     .md\:mb-2 {
         margin-bottom: .5rem
     }
+
     .md\:mt-4 {
         margin-top: 1rem
     }
+
     .md\:mr-4 {
         margin-right: 1rem
     }
+
     .md\:ml-4 {
         margin-left: 1rem
     }
+
     .md\:mt-6 {
         margin-top: 1.5rem
     }
+
     .md\:mr-6 {
         margin-right: 1.5rem
     }
+
     .md\:mb-6 {
         margin-bottom: 1.5rem
     }
+
     .md\:mt-8 {
         margin-top: 2rem
     }
+
     .md\:mr-8 {
         margin-right: 2rem
     }
+
     .md\:ml-8 {
         margin-left: 2rem
     }
+
     .md\:mt-10 {
         margin-top: 2.5rem
     }
+
     .md\:mt-16 {
         margin-top: 4rem
     }
+
     .md\:mr-16 {
         margin-right: 4rem
     }
+
     .md\:mb-16 {
         margin-bottom: 4rem
     }
+
     .md\:ml-16 {
         margin-left: 4rem
     }
+
     .md\:max-w-38 {
         max-width: 38rem
     }
+
     .md\:max-w-2xs {
         max-width: 10rem
     }
+
     .md\:max-w-md {
         max-width: 40rem
     }
+
     .md\:min-h-lg {
         min-height: 42rem
     }
+
     .md\:min-w-sm {
         min-width: 30rem
     }
+
     .md\:-m-0 {
         margin: 0
     }
+
     .md\:-mt-16 {
         margin-top: -4rem
     }
+
     .md\:p-0 {
         padding: 0
     }
+
     .md\:p-1 {
         padding: .25rem
     }
+
     .md\:p-6 {
         padding: 1.5rem
     }
+
     .md\:p-8 {
         padding: 2rem
     }
+
     .md\:p-10 {
         padding: 2.5rem
     }
+
     .md\:py-0 {
         padding-bottom: 0;
         padding-top: 0
     }
+
     .md\:px-0 {
         padding-left: 0;
         padding-right: 0
     }
+
     .md\:py-3 {
         padding-bottom: .75rem;
         padding-top: .75rem
     }
+
     .md\:py-4 {
         padding-bottom: 1rem;
         padding-top: 1rem
     }
+
     .md\:px-4 {
         padding-left: 1rem;
         padding-right: 1rem
     }
+
     .md\:px-6 {
         padding-left: 1.5rem;
         padding-right: 1.5rem
     }
+
     .md\:py-8 {
         padding-bottom: 2rem;
         padding-top: 2rem
     }
+
     .md\:px-8 {
         padding-left: 2rem;
         padding-right: 2rem
     }
+
     .md\:px-10 {
         padding-left: 2.5rem;
         padding-right: 2.5rem
     }
+
     .md\:py-12 {
         padding-bottom: 3rem;
         padding-top: 3rem
     }
+
     .md\:py-16 {
         padding-bottom: 4rem;
         padding-top: 4rem
     }
+
     .md\:px-16 {
         padding-left: 4rem;
         padding-right: 4rem
     }
+
     .md\:pt-0 {
         padding-top: 0
     }
+
     .md\:pb-0 {
         padding-bottom: 0
     }
+
     .md\:pl-2 {
         padding-left: .5rem
     }
+
     .md\:pr-3 {
         padding-right: .75rem
     }
+
     .md\:pt-4 {
         padding-top: 1rem
     }
+
     .md\:pt-6 {
         padding-top: 1.5rem
     }
+
     .md\:pr-8 {
         padding-right: 2rem
     }
+
     .md\:pb-8 {
         padding-bottom: 2rem
     }
+
     .md\:absolute {
         position: absolute
     }
+
     .md\:pin-b {
         bottom: 0
     }
+
     .md\:text-left {
         text-align: left
     }
+
     .md\:text-center {
         text-align: center
     }
+
     .md\:text-right {
         text-align: right
     }
+
     .md\:text-pink {
         color: #ee6d93
     }
+
     .md\:text-xs {
         font-size: .75rem
     }
+
     .md\:text-sm {
         font-size: .875rem
     }
+
     .md\:text-lg {
         font-size: 1.125rem
     }
+
     .md\:text-xl {
         font-size: 1.25rem
     }
+
     .md\:text-2xl {
         font-size: 1.625rem
     }
+
     .md\:text-3xl {
         font-size: 1.875rem
     }
+
     .md\:text-4xl {
         font-size: 2.25rem
     }
+
     .md\:text-5xl {
         font-size: 3rem
     }
+
     .md\:visible {
         visibility: visible
     }
+
     .md\:invisible {
         visibility: hidden
     }
+
     .md\:w-32 {
         width: 8rem
     }
+
     .md\:w-72 {
         width: 18rem
     }
+
     .md\:w-128 {
         width: 32rem
     }
+
     .md\:w-auto {
         width: auto
     }
+
     .md\:w-1\/2 {
         text-align: center;
         width: 100%
     }
+
     .md\:w-1\/3 {
         width: 33.33333%
     }
+
     .md\:w-2\/3 {
         width: 66.66667%
     }
+
     .md\:w-1\/4 {
         width: 25%
     }
+
     .md\:w-3\/4 {
         width: 75%
     }
+
     .md\:w-2\/5 {
         width: 40%
     }
+
     .md\:w-3\/5 {
         width: 60%
     }
+
     .md\:w-4\/5 {
         width: 80%
     }
+
     .md\:w-5\/6 {
         width: 83.33333%
     }
+
     .md\:w-full {
         width: 100%
     }
@@ -4183,270 +4313,354 @@ hr {
     .lg\:bg-white {
         background-color: #fff
     }
+
     .lg\:rounded-b-none {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0
     }
+
     .lg\:border-b {
         border-bottom-width: 1px
     }
+
     .lg\:block {
         display: block
     }
+
     .lg\:inline-block {
         display: inline-block
     }
+
     .lg\:hidden {
         display: none
     }
+
     .lg\:flex {
         display: flex
     }
+
     .lg\:flex-row {
         flex-direction: row
     }
+
     .lg\:flex-no-wrap {
         flex-wrap: nowrap
     }
+
     .lg\:items-center {
         align-items: center
     }
+
     .lg\:justify-between {
         justify-content: space-between
     }
+
     .lg\:flex-1 {
         flex: 1
     }
+
     .lg\:h-10 {
         height: 2.5rem
     }
+
     .lg\:h-16 {
         height: 4rem
     }
+
     .lg\:h-32 {
         height: 4rem
     }
+
     .lg\:h-48 {
         height: 12rem
     }
+
     .lg\:leading-loose {
         line-height: 2
     }
+
     .lg\:m-0 {
         margin: 0
     }
+
     .lg\:my-0 {
         margin-bottom: 0;
         margin-top: 0
     }
+
     .lg\:my-4 {
         margin-bottom: 1rem;
         margin-top: 1rem
     }
+
     .lg\:mx-4 {
         margin-left: 1rem;
         margin-right: 1rem
     }
+
     .lg\:my-8 {
         margin-bottom: 2rem;
         margin-top: 2rem
     }
+
     .lg\:my-16 {
         margin-bottom: 4rem;
         margin-top: 4rem
     }
+
     .lg\:mx-auto {
         margin-left: auto;
         margin-right: auto
     }
+
     .lg\:mt-0 {
         margin-top: 0
     }
+
     .lg\:mr-0 {
         margin-right: 0
     }
+
     .lg\:mb-0 {
         margin-bottom: 0
     }
+
     .lg\:mb-1 {
         margin-bottom: .25rem
     }
+
     .lg\:mt-2 {
         margin-top: .5rem
     }
+
     .lg\:mb-2 {
         margin-bottom: .5rem
     }
+
     .lg\:mt-4 {
         margin-top: 1rem
     }
+
     .lg\:mr-6 {
         margin-right: 1.5rem
     }
+
     .lg\:mt-8 {
         margin-top: 2rem
     }
+
     .lg\:mr-8 {
         margin-right: 2rem
     }
+
     .lg\:mb-8 {
         margin-bottom: 2rem
     }
+
     .lg\:ml-8 {
         margin-left: 2rem
     }
+
     .lg\:mt-10 {
         margin-top: 2.5rem
     }
+
     .lg\:mr-10 {
         margin-right: 2.5rem
     }
+
     .lg\:ml-14 {
         margin-left: 3.5rem
     }
+
     .lg\:mt-16 {
         margin-top: 4rem
     }
+
     .lg\:mb-16 {
         margin-bottom: 4rem
     }
+
     .lg\:ml-16 {
         margin-left: 4rem
     }
+
     .lg\:mr-32 {
         margin-right: 8rem
     }
+
     .lg\:max-w-24 {
         max-width: 24rem
     }
+
     .lg\:max-w-2xs {
         max-width: 10rem
     }
+
     .lg\:max-w-full {
         max-width: 100%
     }
+
     .lg\:min-w-16 {
         min-width: 16rem
     }
+
     .lg\:p-0 {
         padding: 0
     }
+
     .lg\:px-0 {
         padding-left: 0;
         padding-right: 0
     }
+
     .lg\:py-2 {
         padding-bottom: .5rem;
         padding-top: .5rem
     }
+
     .lg\:py-4 {
         padding-bottom: 1rem;
         padding-top: 1rem
     }
+
     .lg\:px-4 {
         padding-left: 1rem;
         padding-right: 1rem
     }
+
     .lg\:py-8 {
         padding-bottom: 2rem;
         padding-top: 2rem
     }
+
     .lg\:px-10 {
         padding-left: 2.5rem;
         padding-right: 2.5rem
     }
+
     .lg\:py-12 {
         padding-bottom: 3rem;
         padding-top: 3rem
     }
+
     .lg\:py-16 {
         padding-bottom: 4rem;
         padding-top: 4rem
     }
+
     .lg\:pl-0 {
         padding-left: 0
     }
+
     .lg\:pr-8 {
         padding-right: 2rem
     }
+
     .lg\:pr-10 {
         padding-right: 2.5rem
     }
+
     .lg\:pb-10 {
         padding-bottom: 2.5rem
     }
+
     .lg\:pr-12 {
         padding-right: 3rem
     }
+
     .lg\:pt-16 {
         padding-top: 4rem
     }
+
     .lg\:pb-16 {
         padding-bottom: 4rem
     }
+
     .lg\:pt-24 {
         padding-top: 6rem
     }
+
     .lg\:shadow-lg {
         box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08)
     }
+
     .lg\:text-left {
         text-align: left
     }
+
     .lg\:text-base {
         font-size: 1rem
     }
+
     .lg\:text-xl {
         font-size: 1.25rem
     }
+
     .lg\:text-2xl {
         font-size: 1.625rem
     }
+
     .lg\:text-3xl {
         font-size: 1.875rem
     }
+
     .lg\:text-4xl {
         font-size: 2.25rem
     }
+
     .lg\:w-10 {
         width: 2.5rem
     }
+
     .lg\:w-16 {
         width: 4rem
     }
+
     .lg\:w-64 {
         width: 4rem
     }
+
     .lg\:w-96 {
         width: 24rem
     }
+
     .lg\:w-auto {
         width: auto
     }
+
     .lg\:w-1\/2 {
         width: 50%
     }
+
     .lg\:w-1\/3 {
         width: 33.33333%
     }
+
     .lg\:w-2\/3 {
         width: 66.66667%
     }
+
     .lg\:w-3\/4 {
         width: 75%
     }
+
     .lg\:w-1\/5 {
         width: 20%
     }
+
     .lg\:w-3\/5 {
         width: 60%
     }
+
     .lg\:w-4\/5 {
         width: 80%
     }
+
     .lg\:w-5\/6 {
         width: 83.33333%
     }
+
     .lg\:w-full {
         width: 100%
     }
@@ -4456,22 +4670,69 @@ hr {
     .xl\:-ml-8 {
         margin-left: -2rem
     }
+
     .xl\:-mt-16 {
         margin-top: -4rem
     }
+
     .xl\:text-lg {
         font-size: 1.125rem
     }
+
     .xl\:text-2xl {
         font-size: 1.625rem
     }
+
     .xl\:w-1\/2 {
         width: 50%
     }
+
     .xl\:w-1\/3 {
         width: 33.33333%
     }
+
     .xl\:w-3\/5 {
         width: 60%
     }
+}
+
+.dropbox {
+    outline: 2px dashed grey;
+    /* the dash box */
+    outline-offset: -10px;
+    background: lightcyan;
+    color: dimgray;
+    padding: 10px 10px;
+    min-height: 200px;
+    /* minimum height */
+    position: relative;
+    cursor: pointer;
+}
+
+.input-file {
+    opacity: 0;
+    /* invisible but it's there! */
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.dropbox:hover {
+    background: lightblue;
+    /* when mouse over to the drop zone, change color */
+}
+
+.dropbox p {
+    font-size: 1.2em;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.custom-file-label {
+    font-size: 0.6em;
+}
+
+.l-h {
+    line-height: 0.5 !important;
 }
