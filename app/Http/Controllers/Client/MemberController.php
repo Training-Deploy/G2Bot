@@ -46,7 +46,7 @@ class MemberController extends Controller
             $sheet = preg_replace('/&#?[a-z0-9]{2,8};/i', '', $req->sheet);
             $member = new MembersImport($this->member, $sheet);
             Excel::import($member, $req->file);
-            
+
             if (count($member->validated()) > 0) {
                 return response()->json(['error' => $member->validated()], 500);
             }

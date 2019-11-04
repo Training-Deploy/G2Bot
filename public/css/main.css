@@ -618,7 +618,7 @@ table.table td:before {
     background-repeat: no-repeat;
     background-size: 140%;
     height: 100vh;
-    width: 68vw
+    width: 35vw
 }
 
 @media(min-width:992px) {
@@ -2557,7 +2557,7 @@ table.table td:before {
 }
 
 .h-screen {
-    height: 60vh
+    /*height: 60vh*/
 }
 
 .leading-none {
@@ -4735,4 +4735,12 @@ hr {
 
 .l-h {
     line-height: 0.5 !important;
+}
+
+.error-form {
+    color: #dc3545;
+}
+
+.error-input {
+    border-color: #dc3545 !important;
 }

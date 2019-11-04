@@ -1,6 +1,10 @@
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 Vue.config.devtools = true;
 
+window.data = {
+    'auth': $('#checkAuth').val() ?  true : false,
+}
+
 var home = new Vue({
     el: '#app',
     mixins: [mixin],
@@ -10,7 +14,8 @@ var home = new Vue({
         file: '',
         sheetName: 'MemberInfo',
         fileName: 'Choose File',
-        apiKey: null,
+        api_key: '',
+        account_id: null,
         formErrors: null,
         bots: {
             infor: null,
@@ -18,14 +23,23 @@ var home = new Vue({
         },
         auth: window.data.auth
     },
+    watch: {
+        'account_id' () {
+            if (this.formErrors && this.formErrors.account_id[0]) this.formErrors.account_id[0] = null;
+        },
+    },
+
+    created() {
+        if (this.auth) this.getUserInfor();
+    },
     methods: {
-        getBotsInfor() {
+        checkBot() {
             if (!this.auth) {
                 toastr.warning('Please Login', 'Warning');
 
                 return;
             }
-            if (!this.apiKey) {
+            if (!this.api_key) {
                 toastr.warning('Please add apiKey', 'Warning');
 
                 return;
@@ -33,7 +47,7 @@ var home = new Vue({
             var self = this;
             var authOptions = {
                 method: 'GET',
-                url: this.url_bots_infor + this.apiKey,
+                url: this.url_bots + this.api_key,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -41,11 +55,32 @@ var home = new Vue({
             }
             axios(authOptions).then((response) => {
                 self.bots = response.data;
-                toastr.success('Success');
+                toastr.success('Api Valid');
+            }).catch((error) => {
+                self.bots.infor = null;
+                self.bots.rooms = null;
+                self.formErrors = this.handleError(error);
+            });
+        },
+
+        getUserInfor() {
+            var self = this;
+            var authOptions = {
+                method: 'GET',
+                url: '/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                json: true
+            }
+            axios(authOptions).then((response) => {
+                self.api_key = response.data.bots[0].api_key;
+                self.account_id = response.data.account_id;
             }).catch((error) => {
                 self.formErrors = this.handleError(error);
             });
         },
+
         onFileChange(event) {
             this.file = event.target.files[0]
             this.fileName = this.file.name
@@ -69,6 +104,34 @@ var home = new Vue({
             .catch(error => {
                 this.displayAlertError(error)
             })
+        },
+
+        saveBot() {
+            if (!this.auth) {
+                toastr.warning('Please Login', 'Warning');
+
+                return;
+            }
+
+            var self = this;
+            var authOptions = {
+                method: 'POST',
+                url: this.url_bots,
+                params: {
+                    'api_key': this.api_key,
+                    'account_id': this.account_id,
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                json: true
+            }
+
+            axios(authOptions).then((response) => {
+                toastr.success('Save Bots Success');
+            }).catch((error) => {
+                self.formErrors = this.handleError(error);
+            });
         },
     },
 });

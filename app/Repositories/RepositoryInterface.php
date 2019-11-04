@@ -42,4 +42,24 @@ interface RepositoryInterface
     * @return void
     */
     public function delete($id);
+
+        /**
+     * Update Or create
+     *
+     * @param array $conditional
+     * @param array $attributes
+     * @return mixed
+     */
+    public function updateOrCreate(array $conditional, array $attributes = []);
+
+
+    /**
+     * findWith
+     *
+     * @param  mixed $id
+     * @param  mixed $with
+     *
+     * @return void
+     */
+    public function findWith($id, $with = []);
 }

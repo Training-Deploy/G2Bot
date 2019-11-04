@@ -16,16 +16,6 @@ class MemberEloquentRepository extends EloquentRepository implements MemberRepos
         return \App\Models\Member::class;
     }
 
-    /**
-     * Update Or Create
-     *
-     * @param array $attributes
-     * @return mixed
-     */
-    public function updateOrCreate(array $conditional, array $attributes)
-    {
-        return $this->model->updateOrCreate($conditional, $attributes);
-    }
 
     /**
      * Get List By User
