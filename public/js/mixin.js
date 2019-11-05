@@ -4,16 +4,23 @@ var mixin = {
             url_bots: '/bots/',
             url_upload_excel: '/members/',
             url_home: '/',
+            url_login: '/login/submit'
         }
     },
     methods: {
         handleError(error) {
-            if (error.response.status == 500) {
+            let status = error.response.status;
+            if (status == 500) {
                 toastr.error('ApiKey invalid', 'Error');
 
                 return;
             }
 
+            if (status == 400) {
+                toastr.error(error.response.data.message);
+
+                return;
+            }
             return (error.response && error.response.data) ? error.response.data.errors : null;
         },
         displayAlertError(error) {

@@ -17,15 +17,29 @@ var home = new Vue({
         api_key: '',
         account_id: null,
         formErrors: null,
+        loginErrors: null,
         bots: {
             infor: null,
             rooms: null,
+        },
+        credentials: {
+            email: null,
+            password: null,
+            remember: null,
         },
         auth: window.data.auth
     },
     watch: {
         'account_id' () {
             if (this.formErrors && this.formErrors.account_id[0]) this.formErrors.account_id[0] = null;
+        },
+
+        'credentials.email'() {
+            if (this.loginErrors && this.loginErrors.email[0]) this.loginErrors.email[0] = null
+        },
+
+        'credentials.password'() {
+            if (this.loginErrors && this.loginErrors.password[0]) this.loginErrors.password[0] = null
         },
     },
 
@@ -60,6 +74,24 @@ var home = new Vue({
                 self.bots.infor = null;
                 self.bots.rooms = null;
                 self.formErrors = this.handleError(error);
+            });
+        },
+
+        login() {
+            var self = this;
+            var authOptions = {
+                method: 'POST',
+                url: this.url_login,
+                params: this.credentials,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                json: true
+            }
+            axios(authOptions).then((response) => {
+                location.reload();
+            }).catch((error) => {
+                self.loginErrors = this.handleError(error);
             });
         },
 
