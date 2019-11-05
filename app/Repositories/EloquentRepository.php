@@ -128,4 +128,16 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         return $this->model->with($with)->find($id);
     }
+
+     /**
+     * Get With
+     *
+     * @param  mixed $with
+     *
+     * @return void
+     */
+    public function getWith($with = [])
+    {
+        return $this->model->with($with)->get();
+    }
 }

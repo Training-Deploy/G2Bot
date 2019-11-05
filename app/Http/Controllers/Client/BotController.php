@@ -8,6 +8,7 @@ use App\Http\Requests\SaveBotRequest;
 use App\Http\Controllers\Controller;
 use App\Repositories\Bot\BotRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Member\MemberRepositoryInterface;
 
 class BotController extends Controller
 {
@@ -15,13 +16,18 @@ class BotController extends Controller
 
     protected $userRepository;
 
+    protected $memberRepository;
     /**
      * Create a new controller instance.
      */
-    public function __construct(BotRepositoryInterface $botRepository, UserRepositoryInterface $userRepository)
-    {
+    public function __construct(
+        BotRepositoryInterface $botRepository,
+        UserRepositoryInterface $userRepository,
+        MemberRepositoryInterface $memberRepository
+    ) {
         $this->botRepository = $botRepository;
         $this->userRepository = $userRepository;
+        $this->memberRepository = $memberRepository;
     }
 
     /**

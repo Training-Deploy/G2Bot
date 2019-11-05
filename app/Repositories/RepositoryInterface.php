@@ -62,4 +62,13 @@ interface RepositoryInterface
      * @return void
      */
     public function findWith($id, $with = []);
+
+    /**
+     * Get With
+     *
+     * @param  mixed $with
+     *
+     * @return void
+     */
+    public function getWith($with = []);
 }
