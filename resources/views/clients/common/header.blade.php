@@ -15,12 +15,46 @@
                         <li><a href="{{ route('logout-client') }}">Logout</a></li>
                         <input type="hidden" id="checkAuth" value="{{ Auth::user() }}">
                     @else
-                        <li><a href="{{ route('login-client') }}">Login</a></li>
+                        <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
                     @endif
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <div class="w-full py-4 text-center align-end text-4xl h-16 self-end z-10"></div>
+    <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Login</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center social-btn">
+                        <a  href="{{ route('login-client') }}" class="btn btn-primary btn-block"><i class="fab fa-google"></i> Sign in with <b>Google</b></a>
+                    </div>
+                    <div class="or-seperator"><i>or</i></div>
+                    <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" v-on:submit.prevent="login()">
+                        <div class="form-group">
+                            <label for="uname1">Email</label>
+                            <input type="email" v-model.trim="credentials.email" class="form-control form-control-lg" :class="{ 'error-input': loginErrors && loginErrors.email[0] } "name="email" id="emai;" required="">
+                            <div v-if="loginErrors && loginErrors.email[0]" class="error-form">@{{ loginErrors.email[0] }}</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" v-model.trim="credentials.password" class="form-control form-control-lg" class="{ 'error-input: loginErrors && loginErrors.password'}" id="pwd1" required="" autocomplete="new-password">
+                            <div v-if="loginErrors && loginErrors.password" class="error-form">@{{ loginErrors.password[0] }}</div>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="rememberMe" name="remember" v-model="credentials.remember">
+                          <label class="custom-control-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <div class="form-group float-right">
+                            <button type="submit" class="btn btn-success btn-lg" id="btnLogin">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>

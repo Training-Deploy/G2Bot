@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -61,5 +63,24 @@ class LoginController extends Controller
         if ($this->userRepository->handleLoginCallBack($googleUser)) {
             return redirect()->route('home');
         }
+    }
+
+    /**
+     * Handle login
+     *
+     * @param  mixed $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials, $request->input('remember'))) {
+            return response()->json(true);
+        }
+
+        return response()->json([
+            'message' => 'Acount incorrect, Please verify again',
+        ], 400);
     }
 }

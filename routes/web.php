@@ -14,6 +14,7 @@
 Route::get('/', 'Client\HomeController@index')->name('home');
 Route::get('login/email', 'Auth\LoginController@redirectToProvider')->name('login-client');
 Route::get('login/email/callback', 'Auth\LoginController@handleProviderCallback');
+Route::post('login/submit', 'Auth\LoginController@login')->name('login');
 
 Route::get('/logout', function () {
     Auth::logout();
