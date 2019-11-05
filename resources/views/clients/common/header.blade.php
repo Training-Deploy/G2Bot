@@ -13,6 +13,7 @@
                     @if(Auth::user())
                         <li><a href="#">{{ Auth::user()->name }} </a></li>
                         <li><a href="{{ route('logout-client') }}">Logout</a></li>
+                        <input type="hidden" id="checkAuth" value="{{ Auth::user() }}">
                     @else
                         <li><a href="{{ route('login-client') }}">Login</a></li>
                     @endif
@@ -20,20 +21,6 @@
                 </div>
             </div>
         </nav>
-    </div>
-    <div class="container mx-auto flex flex-wrap mt-4 md:-mt-16 z-10">
-        <div class="w-full flex flex-wrap px-4 z-10">
-            <div class="w-full lg:w-3/5 flex flex-wrap justify-center flex-col">
-                <div class="md:mt-10 md:mr-16 md:pr-8">
-                    <div class="md:bg-white rounded flex flex-wrap md:flex-no-wrap md:p-1 mt-6 relative">
-                        <input type="text" placeholder="API Key" v-model="apiKey" class="l-h rounded bg-white flex-grow outline-none p-4-template md:py-0 font-medium tracking-wide text-purple"> <!---->
-                        <button v-on:click="getBotsInfor()" class="btnmain md:btnmain-lg btnmain-green-gradient flex items-center p-4-template mt-2 md:mt-0 w-full md:w-auto justify-center">
-                            <span>Start</span> <!---->
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="w-full py-4 text-center align-end text-4xl h-16 self-end z-10"></div>
 </header>

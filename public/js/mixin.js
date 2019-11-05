@@ -1,8 +1,9 @@
 var mixin = {
     data: function () {
         return {
-            url_bots_infor: '/bots/',
+            url_bots: '/bots/',
             url_upload_excel: '/members/',
+            url_home: '/',
         }
     },
     methods: {
@@ -33,14 +34,13 @@ var mixin = {
         },
         displayDataSuccess(response) {
             let data = response.data
-            var template = '<div class="alert alert-success">' +
+            var template = '<div class="success-upload alert alert-success">' +
             data.success + '<br/> Updated : <b>' + data.updated +
             '</b> Records valid<br/> Failed : <b>' + data.failed +
             ' </b> Records invalid</div> '
-            toastr.success(response.data.success)
-            
-            $('#errors').empty()
-            $('#errors').html(template)
+            toastr.success(response.data.success);
+            $('#errors').empty();
+            $('#errors').html(template);
         }
     },
 }

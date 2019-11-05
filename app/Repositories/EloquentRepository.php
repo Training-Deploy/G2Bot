@@ -104,4 +104,28 @@ abstract class EloquentRepository implements RepositoryInterface
 
         return false;
     }
+
+    /**
+     * Update Or Create
+     *
+     * @param array $attributes
+     * @return mixed
+     */
+    public function updateOrCreate(array $conditional, array $attributes = [])
+    {
+        return $this->model->updateOrCreate($conditional, $attributes);
+    }
+
+      /**
+     * findWith
+     *
+     * @param  mixed $id
+     * @param  mixed $with
+     *
+     * @return void
+     */
+    public function findWith($id, $with = [])
+    {
+        return $this->model->with($with)->find($id);
+    }
 }
