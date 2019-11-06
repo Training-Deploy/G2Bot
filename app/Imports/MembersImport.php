@@ -167,9 +167,9 @@ class MembersImport implements ToCollection, WithStartRow, WithHeadingRow, WithM
         $this->member->updateOrCreate([
             'full_name' => $row['fullname'],
             'birthday' => Carbon::instance(Date::excelToDateTimeObject($row['birthday'])),
+            'user_id' => Auth::user()->id,
         ], [
             'company_email' => isset($row['company_email']) ? $row['company_email'] : null,
-            'user_id' => Auth::user()->id,
             'phone' => isset($row['phone_number']) ? $row['phone_number'] : null,
             'gmail' => isset($row['gmail']) ? $row['gmail'] : null,
             'github_account' => isset($row['github_account']) ? $row['github_account'] : null,
