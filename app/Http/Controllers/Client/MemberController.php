@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Client;
 
-use DataTables;
+use DB;
 use Illuminate\Http\Request;
 use App\Imports\MembersImport;
 use \Maatwebsite\Excel\Exceptions;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MemberRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Member\MemberRepositoryInterface;
 
@@ -18,16 +19,16 @@ class MemberController extends Controller
      *
      * @var App\Repositories\Member\MemberRepositoryInterface $member
      */
-    protected $member = null;
+    protected $memberRepository = null;
 
     /**
      * Constructor
      *
      * @param MemberRepositoryInterface $member
      */
-    public function __construct(MemberRepositoryInterface $member)
+    public function __construct(MemberRepositoryInterface $memberRepository)
     {
-        $this->member = $member;
+        $this->memberRepository = $memberRepository;
     }
 
     /**
@@ -44,7 +45,7 @@ class MemberController extends Controller
 
         try {
             $sheet = preg_replace('/&#?[a-z0-9]{2,8};/i', '', $req->sheet);
-            $member = new MembersImport($this->member, $sheet);
+            $member = new MembersImport($this->memberRepository, $sheet);
             Excel::import($member, $req->file);
 
             if (count($member->validated()) > 0) {
@@ -69,23 +70,65 @@ class MemberController extends Controller
         );
     }
 
+    /**
+     * Get list user by auth id
+     *
+     * @return mixed
+     */
     public function index()
     {
-        return DataTables::of($this->member->getListByUser(Auth::user()->id))
-        ->addColumn('action', function ($data) {
-            return '<button class="btn btn-primary" data-id="
-            '.$data->id.'"><i class="fa fa-fw fa-edit"></i>Edit </button>&nbsp
-            <button class="btn btn-danger delete" data-id="'.$data->id.'">
-            <i class="fa fa-fw fa-trash-o"></i>Delete </button>';
-        })
-        ->rawColumns(['action'])
-        ->make(true);
-    }
-
-    public function show()
-    {
-        $members = $this->member->getAll();
+        $members = $this->memberRepository->getListByUser(Auth::user()->id)->get();
 
         return response()->json(['data' => $members]);
+    }
+
+    /**
+     * Update member , user_id match Auth id
+     *
+     * @param MemberRequest $request
+     * @param integer $id
+     * @return mixed
+     */
+    public function update(MemberRequest $request, $id)
+    {
+        if (Auth::user()->id == $request->user_id) {
+            $this->memberRepository->updateMember($id, $request->all());
+
+            return response()->json(true);
+        }
+    }
+    
+    /**
+     * Destroy member
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        $result = $this->memberRepository->deleteMember($id);
+
+        return response()->json($result);
+    }
+
+
+    /**
+     * Multiple Delete Members
+     *
+     * @param Request $req
+     * @return mixed
+     */
+    public function multipleDestroy(Request $req)
+    {
+        DB::beginTransaction();
+        try {
+            $result = $this->memberRepository->multipleDelete($req->data_del);
+            DB::commit();
+        } catch (Exception $th) {
+            DB::rollBack();
+            throw new Exception($th->getMessage());
+        }
+
+        return response()->json($result);
     }
 }

@@ -25,5 +25,6 @@ Route::get('/logout', function () {
 
 Route::group(['prefix' => '/', 'namespace' => 'Client'], function () {
     Route::resource('bots', 'BotController', ['except' => ['create', 'edit', 'destroy']]);
-    Route::resource('members', 'MemberController', ['except' => ['create', 'edit', 'destroy']]);
+    Route::resource('members', 'MemberController', ['except' => ['create', 'edit']]);
+    Route::post('members/multipledelete', 'MemberController@multipleDestroy');
 });
