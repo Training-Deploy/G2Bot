@@ -120,6 +120,7 @@
                                 <div v-if="formErrors && formErrors.account_id[0]" :class="{ 'error-form': formErrors && formErrors.account_id[0]}" >
                                     @{{ formErrors.account_id[0] }}
                                 </div>
+
                             </div>
                         </div>
                         <button class="btn btn-primary" :disabled="!bots.infor" type="submit">Save</button>
