@@ -18,4 +18,28 @@ interface MemberRepositoryInterface
      * @return array member
      */
     public function getMembersBirthday($userId);
+
+    /**
+     * Multple Delete
+     *
+     * @param Array $list
+     * @return mixed
+     */
+    public function multipleDelete($list);
+
+    /**
+     * Delete Member
+     *
+     * @param Integer $id
+     * @return void
+     */
+    public function deleteMember($id);
+
+     /**
+     * Update
+     * @param Integer $id
+     * @param array $attributes
+     * @return bool|mixed
+     */
+    public function updateMember($id, array $attributes);
 }

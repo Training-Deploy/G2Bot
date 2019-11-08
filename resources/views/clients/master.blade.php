@@ -24,7 +24,7 @@
                         <h2 class="text-purple-dark text-2xl mb-6">
                             @{{ title }}
                         </h2>
-                        <div class="bg-white rounded-lg p-6 md:flex lg:block">
+                        <div class="bg-white rounded-lg p-6 md:flex lg:block box-shadow">
                             <div>
                                 <div class="flex items-start mb-2 d-flex justify-content-center">
                                     <div class="alert alert-warning" role="alert">
@@ -74,33 +74,23 @@
                                                     <label class="custom-file-label" for="customFile">@{{ fileName }}</label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary float-right">Upload</button>
+                                            <button type="submit" class="el-button el-button--primary">Upload</button>
                                         </h3>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </a>
-                    <table id="list-members" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Birthday</th>
-                                <th>Company Email</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
+                    
                 </div>
             </div>
+            <listmember v-if="auth" ref="members"></listmember>
+            
             <div class="mx-auto container mb-12">
                 <h2 class="text-purple-dark text-2xl mb-6">
                     BOT
                 </h2>
-                <div class="bg-white rounded-lg p-6 md:flex lg:block">
+                <div class="bg-white rounded-lg p-6 md:flex lg:block box-shadow">
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
                             <label for="validationTooltip01">API KEY</label>
@@ -129,12 +119,9 @@
         </section>
     </div>
     @include('clients.common.footer')
+    <notifications group="notify" />
 </div>
 <script src="{{ mix('/js/library/app.js') }}"></script>
-<script src="{{ asset('/js/mixin.js') }}"></script>
-<script src="{{ asset('/js/home.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 @yield('script')
 </body>
 </html>
