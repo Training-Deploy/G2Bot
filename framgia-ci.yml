@@ -41,7 +41,7 @@ deploy:
     image: framgiaciteam/deb-deploy:7.3
     when:
       branch: develop
-    run: dep deploy development -vv
+    run: dep deploy development -vvv
   # rocketeer_production:
   #   image: framgiaciteam/deployer:2.0
   #   when:
