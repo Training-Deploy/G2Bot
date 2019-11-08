@@ -9,8 +9,6 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-    window.Vue = require('vue');
-    window.toastr = require('toastr');
     require('bootstrap');
 } catch (e) {}
 window.axios = require('axios');

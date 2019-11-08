@@ -3,6 +3,7 @@
 namespace App\Repositories\Member;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\EloquentRepository;
 
 class MemberEloquentRepository extends EloquentRepository implements MemberRepositoryInterface
@@ -72,5 +73,61 @@ class MemberEloquentRepository extends EloquentRepository implements MemberRepos
         }
 
         return $result;
+    }
+
+    /**
+     * Delete Member
+     *
+     * @param Integer $id
+     * @return void
+     */
+    public function deleteMember($id)
+    {
+        if (Auth::check()) {
+            $result = $this->model->where('user_id', Auth::user()->id)->where('id', $id)->delete();
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Multple Delete
+     *
+     * @param Array $list
+     * @return mixed
+     */
+    public function multipleDelete($list)
+    {
+        if (Auth::check()) {
+            $result = $this->model->whereIn('id', $list)->delete();
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Update
+     * @param $id
+     * @param array $attributes
+     * @return bool|mixed
+     */
+    public function updateMember($id, array $attributes)
+    {
+        $result = $this->model->find($id);
+        if ($result && $result->user_id == $attributes['user_id']) {
+            $result->update($attributes);
+            return $result;
+        }
+
+        return false;
     }
 }
