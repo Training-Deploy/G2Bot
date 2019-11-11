@@ -22,4 +22,4 @@ mix.webpackConfig({
  */
 
 mix.js('resources/js/app.js', 'public/js/library')
-   .sass('resources/sass/app.scss', 'public/css/library');
+   .sass('resources/sass/app.scss', 'public/css/library').version();
