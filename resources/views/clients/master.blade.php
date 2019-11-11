@@ -7,8 +7,7 @@
     <link rel="icon" type="image/png" href="/img/bot.png" sizes="16x16">
     <meta name="theme-color" content="#1d185e">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/library/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/library/app.css') }}">
 
     @yield('style')
 </head>
@@ -93,32 +92,50 @@
                 <div class="bg-white rounded-lg p-6 md:flex lg:block box-shadow">
                     <div class="form-row">
                         <div class="col-md-8 mb-3">
-                            <label for="validationTooltip01">API KEY</label>
-                            <input type="text" v-model="api_key" v-on:keyup="checkBot()" placeholder="Please add api key" class="form-control" id="apikey" required>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="validationTooltip02">.</label>
-                            <div class="clearfix"></div>
-                            <button class="btn btn-primary" class="form-control" v-on:click="checkBot()">Check Api Key</button>
-                        </div>
-                    </div>
-                    <form class="needs-validation" v-on:submit.prevent="saveBot">
-                        <div class="form-row">
-                            <div class="col-md-8 mb-3">
-                                <label for="validationTooltip03">AccountID</label>
-                                <input type="text" class="form-control" :class="{ 'error-input': formErrors && formErrors.account_id[0]}" v-model="account_id" name="account_id" id="account_id">
-                                <div v-if="formErrors && formErrors.account_id[0]" :class="{ 'error-form': formErrors && formErrors.account_id[0]}" >
-                                    @{{ formErrors.account_id[0] }}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="validationTooltip01">API KEY</label>
+                                    <input type="text" v-model="api_key" v-on:keyup="checkBot()" placeholder="Please add api key" class="form-control mb-3" id="apikey" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="needs-validation" v-on:submit.prevent="saveBot">
+                                        <label for="validationTooltip03">AccountID</label>
+                                        <input type="text" class="form-control mb-3" :class="{ 'error-input': formErrors && formErrors.account_id[0]}" v-model="account_id" name="account_id" id="account_id">
+                                        <div v-if="formErrors && formErrors.account_id[0]" :class="{ 'error-form': formErrors && formErrors.account_id[0]}" >
+                                            @{{ formErrors.account_id[0] }}
+                                        </div>
+                                        <button class="el-button el-button--primary" :class="{ 'is-disabled': !bots.infor }" :disabled="!bots.infor" type="submit">Save</button>
+                                        <button class="el-button el-button--primary" class="form-control" type="button" v-on:click="checkBot()">Check Api Key</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary" :disabled="!bots.infor" type="submit">Save</button>
-                    </form>
+                        <div class="col-md-4 mt-6">
+                            <div class="card align-items-center" style="width: 18rem;">
+                                <h4 class="mt-2">Bot Information</h4>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <img :src="bots.infor ? bots.infor.avatar_image_url : '/img/bot.png'" alt="Bot Logo" style="height: 70px;">
+                                    </h5>
+                                    <p class="card-text">
+                                        @{{ bots.infor ? bots.infor.name : 'Name Bot' }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
     @include('clients.common.footer')
+    <loading
+    :active.sync="isLoading"
+    :is-full-page="true"
+    :color="loadColor"
+    :background-color="loadBg"></loading>
     <notifications group="notify" />
 </div>
 <script src="{{ mix('/js/library/app.js') }}"></script>

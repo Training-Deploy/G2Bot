@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" v-model.trim="credentials.password" class="form-control form-control-lg" class="{ 'error-input: loginErrors && loginErrors.password'}" id="pwd1" required="" autocomplete="new-password">
+                            <input type="password" v-model.trim="credentials.password" class="form-control form-control-lg" :class="{ 'error-input': loginErrors && loginErrors.password[0] }" id="pwd1" required="" autocomplete="new-password">
                             <div v-if="loginErrors && loginErrors.password" class="error-form">@{{ loginErrors.password[0] }}</div>
                         </div>
                         <div class="custom-control custom-checkbox">
