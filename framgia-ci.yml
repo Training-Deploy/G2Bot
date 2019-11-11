@@ -41,12 +41,7 @@ deploy:
     image: framgiaciteam/deb-deploy:7.3
     when:
       branch: develop
-    run: dep deploy development -vv
-  # rocketeer_production:
-  #   image: framgiaciteam/deployer:2.0
-  #   when:
-  #     branch: develop
-  #   run: php rocketeer.phar deploy --on=production --no-interaction
+    run: dep deploy development -vvv
   chatwork:
     image: framgiaciteam/chatwork-deploy-only-plugin:latest
     chatwork_token: $$chatwork_token

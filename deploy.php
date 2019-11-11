@@ -5,6 +5,8 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
+inventory(__DIR__ . '/.deployer/hosts.yml');
+
 // Project name
 set('application', 'bot');
 
@@ -23,6 +25,8 @@ set('branch', 'develop');
 // Setup stage default
 set('default_stage', 'development');
 
+// Specify http user
+set('http_user', 'deploy');
 
 // Shared files/dirs between deploys
 add('shared_files', [
@@ -47,11 +51,11 @@ add('writable_dirs', [
 ]);
 
 // Config Hosts to deployer
-host('10.0.4.15')
-    ->user('deploy')
-    ->stage('development')
-    ->set('deploy_path', '~/{{application}}')
-    ->forwardAgent(false);
+// host('10.0.4.15')
+//     ->user('deploy')
+//     ->stage('development')
+//     ->set('deploy_path', '~/{{application}}')
+//     ->forwardAgent(false);
 
 // Tasks
 
