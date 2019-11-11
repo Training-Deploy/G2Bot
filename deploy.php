@@ -68,6 +68,10 @@ task('clear-config', [
     'artisan:migrate',
 ]);
 
+task('rm:cache', function () {
+    run('cd {{release_path}}/bootstrap/cache/ && rm -rf *.php');
+});
+
 task('deploy', [
     // outputs the branch and IP address to the command line
     'deploy:info',
@@ -87,6 +91,8 @@ task('deploy', [
     'deploy:writable',
     // // Yarn install and build assets
     'build-assets',
+    // remove cache
+    'rm:cache',
     // // if Composer is used on the site, the Composer install command is executed
     'deploy:vendors',
     // // loops around release and removes unwanted directories and files
