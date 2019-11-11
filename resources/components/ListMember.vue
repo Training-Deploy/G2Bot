@@ -212,9 +212,9 @@ export default {
         { text: 'Birth Day', value: { label: 'Birth Day', prop: 'birthday' } },
         { text: 'Company Email', value: { label: 'Company Email', prop: 'company_email' } },
         { text: 'Gmail', value: { label: 'gmail', prop: 'gmail' } },
-        { text: 'Phone', value: { label: 'Phone', prop: 'phone_number' } },
+        { text: 'Phone', value: { label: 'Phone', prop: 'phone' } },
         { text: 'Github', value: { label: 'Github', prop: 'github_account' } },
-        { text: 'SSH', value: { label: 'SSH', prop: 'ssh_public_key' } },
+        { text: 'SSH', value: { label: 'SSH', prop: 'ssh_key' } },
         { text: 'Chatwork', value: { label: 'Chatwork', prop: 'chatwork_account' } }
       ],
       members: [],
