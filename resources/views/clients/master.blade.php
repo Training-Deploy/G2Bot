@@ -123,6 +123,7 @@
                                         @{{ bots.infor ? bots.infor.name : 'Name Bot' }}
                                     </p>
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -193,135 +193,135 @@
 </template>
 
 <script>
-import { resolve } from 'q'
-import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
-import { mixin } from '@/mixin'
+import { resolve } from 'q';
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+import { mixin } from '@/mixin';
 
 export default {
-  mixins: [mixin],
-  data: function () {
-    return {
-      state: true,
-      date: new Date(),
-      options: {
-        format: 'YYYY-MM-DD',
-        useCurrent: false
-      },
-      optionsCol: [
-        { text: 'Full Name', value: { label: 'Full Name', prop: 'full_name' } },
-        { text: 'Birth Day', value: { label: 'Birth Day', prop: 'birthday' } },
-        { text: 'Company Email', value: { label: 'Company Email', prop: 'company_email' } },
-        { text: 'Gmail', value: { label: 'gmail', prop: 'gmail' } },
-        { text: 'Phone', value: { label: 'Phone', prop: 'phone' } },
-        { text: 'Github', value: { label: 'Github', prop: 'github_account' } },
-        { text: 'SSH', value: { label: 'SSH', prop: 'ssh_key' } },
-        { text: 'Chatwork', value: { label: 'Chatwork', prop: 'chatwork_account' } }
-      ],
-      members: [],
-      selectedMember: [],
-      titles: [
-        { label: 'Full Name', prop: 'full_name' },
-        { label: 'Birth Day', prop: 'birthday' },
-        { label: 'Company Email', prop: 'company_email' }
-      ],
-      filters: [
-        {
-          prop: ['full_name', 'company_email', 'birthday'],
-          value: ''
-        }
-      ],
-      selectedRow: [],
-      actionCol: {
-        props: { label: 'Action', align: 'center' },
-        buttons: [
-          {
-            props: {
-              type: 'primary',
-              icon: 'el-icon-edit'
+    mixins: [mixin],
+    data: function () {
+        return {
+            state: true,
+            date: new Date(),
+            options: {
+                format: 'YYYY-MM-DD',
+                useCurrent: false,
             },
-            handler: row => {
-              this.$refs['edit-member'].show()
-              this.selectedMember = row
+            optionsCol: [
+                { text: 'Full Name', value: { label: 'Full Name', prop: 'full_name' } },
+                { text: 'Birth Day', value: { label: 'Birth Day', prop: 'birthday' } },
+                { text: 'Company Email', value: { label: 'Company Email', prop: 'company_email' } },
+                { text: 'Gmail', value: { label: 'gmail', prop: 'gmail' } },
+                { text: 'Phone', value: { label: 'Phone', prop: 'phone' } },
+                { text: 'Github', value: { label: 'Github', prop: 'github_account' } },
+                { text: 'SSH', value: { label: 'SSH', prop: 'ssh_key' } },
+                { text: 'Chatwork', value: { label: 'Chatwork', prop: 'chatwork_account' } },
+            ],
+            members: [],
+            selectedMember: [],
+            titles: [
+                { label: 'Full Name', prop: 'full_name' },
+                { label: 'Birth Day', prop: 'birthday' },
+                { label: 'Company Email', prop: 'company_email' },
+            ],
+            filters: [
+                {
+                    prop: ['full_name', 'company_email', 'birthday'],
+                    value: '',
+                },
+            ],
+            selectedRow: [],
+            actionCol: {
+                props: { label: 'Action', align: 'center' },
+                buttons: [
+                    {
+                        props: {
+                            type: 'primary',
+                            icon: 'el-icon-edit',
+                        },
+                        handler: row => {
+                            this.$refs['edit-member'].show();
+                            this.selectedMember = row;
+                        },
+                        label: 'Edit',
+                    },
+                    {
+                        props: {
+                            type: 'danger',
+                            icon: 'el-icon-delete',
+                        },
+                        handler: row => {
+                            this.members.data.splice(this.members.data.indexOf(row), 1);
+                            this.deleteSubmit(row.id);
+                        },
+                        label: 'Delete',
+                    },
+                ],
             },
-            label: 'Edit'
-          },
-          {
-            props: {
-              type: 'danger',
-              icon: 'el-icon-delete'
-            },
-            handler: row => {
-              this.members.data.splice(this.members.data.indexOf(row), 1)
-              this.deleteSubmit(row.id)
-            },
-            label: 'Delete'
-          }
-        ]
-      }
-    }
-  },
-  watch: {
-    titles: function () {
-      if (this.titles.length >= 1) { this.state = true } else { this.state = false }
-    }
-  },
-  created: function () {
-    this.fetchMembers()
-  },
-  methods: {
-    handleSelectionChange (val) {
-      this.selectedRow = val
+        };
     },
-    async fetchMembers () {
-      var self = this
-      var authOptions = {
-        method: 'GET',
-        url: '/members',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+    watch: {
+        titles: function () {
+            if (this.titles.length >= 1) { this.state = true; } else { this.state = false; }
         },
-        json: true
-      }
-      var res = await axios(authOptions)
-      self.members = res.data
     },
-    editSubmit () {
-      this.isLoading = true
-      axios.patch('/members/' + this.selectedMember.id, this.selectedMember)
-        .then((response) => {
-          this.msg('Edit successfully', 'success')
-          this.$refs['edit-member'].hide()
-          this.isLoading = false
-          resolve(response.data)
-        })
+    created: function () {
+        this.fetchMembers();
     },
-    deleteSubmit (id) {
-      axios.delete('/members/' + id)
-        .then((response) => {
-          this.msg('Delete successfully', 'success')
-          resolve(response.data)
-        })
+    methods: {
+        handleSelectionChange (val) {
+            this.selectedRow = val;
+        },
+        async fetchMembers () {
+            var self = this;
+            var authOptions = {
+                method: 'GET',
+                url: '/members',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                json: true,
+            };
+            var res = await axios(authOptions);
+            self.members = res.data;
+        },
+        editSubmit () {
+            this.isLoading = true;
+            axios.patch('/members/' + this.selectedMember.id, this.selectedMember)
+                .then((response) => {
+                    this.msg('Edit successfully', 'success');
+                    this.$refs['edit-member'].hide();
+                    this.isLoading = false;
+                    resolve(response.data);
+                });
+        },
+        deleteSubmit (id) {
+            axios.delete('/members/' + id)
+                .then((response) => {
+                    this.msg('Delete successfully', 'success');
+                    resolve(response.data);
+                });
+        },
+        confirmDelete () {
+            this.$refs.confirm_delete.show();
+        },
+        multipleDelete () {
+            const self = this;
+            const listIds = self.selectedRow.map(row => row.id);
+            axios.post('/members/multipledelete', { data_del: listIds })
+                .then((response) => {
+                    this.msg('Delete successfully', 'success');
+                    self.selectedRow.map(row => {
+                        this.members.data.splice(this.members.data.indexOf(row), 1);
+                    });
+                    resolve(response.data);
+                })
+                .catch(() => {
+                    this.msg('Error', 'error');
+                });
+        },
     },
-    confirmDelete () {
-      this.$refs.confirm_delete.show()
-    },
-    multipleDelete () {
-      const self = this
-      const listIds = self.selectedRow.map(row => row.id)
-      axios.post('/members/multipledelete', { data_del: listIds })
-        .then((response) => {
-          this.msg('Delete successfully', 'success')
-          self.selectedRow.map(row => {
-            this.members.data.splice(this.members.data.indexOf(row), 1)
-          })
-          resolve(response.data)
-        })
-        .catch(() => {
-          this.msg('Error', 'error')
-        })
-    }
-  }
-}
+};
 </script>
  <style scoped>
 .router-anim-enter-active {
