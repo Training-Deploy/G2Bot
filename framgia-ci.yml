@@ -41,7 +41,7 @@ deploy:
     image: framgiaciteam/deb-deploy:7.3
     when:
       branch: develop
-    run: dep deploy development -vvv
+    run: php deployer.phar deploy development -vvv
   chatwork:
     image: framgiaciteam/chatwork-deploy-only-plugin:latest
     chatwork_token: $$chatwork_token
