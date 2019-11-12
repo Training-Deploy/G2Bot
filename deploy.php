@@ -28,6 +28,9 @@ set('default_stage', 'development');
 // Specify http user
 set('http_user', 'deploy');
 
+// Settimeout
+set('default_timeout', 3600);
+
 // Shared files/dirs between deploys
 add('shared_files', [
     '.env',
