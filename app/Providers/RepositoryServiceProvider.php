@@ -27,6 +27,16 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Bot\BotRepositoryInterface::class,
             \App\Repositories\Bot\BotEloquentRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\Room\RoomRepositoryInterface::class,
+            \App\Repositories\Room\RoomEloquentRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\BotUser\BotUserRepositoryInterface::class,
+            \App\Repositories\BotUser\BotUserEloquentRepository::class
+        );
     }
 
     /**

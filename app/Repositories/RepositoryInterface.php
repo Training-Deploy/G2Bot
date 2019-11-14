@@ -71,4 +71,12 @@ interface RepositoryInterface
      * @return void
      */
     public function getWith($with = []);
+
+    /**
+     * Get Where
+     *
+     * @param Array $attributes
+     * @return mixed
+     */
+    public function getWhere($attributes);
 }

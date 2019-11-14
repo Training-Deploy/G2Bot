@@ -21,7 +21,7 @@
                 <section id="lessons" class="pt-24 py-8 px-4 bg-pale-blue-lighter">
                     <div id="upload" class="mx-auto container mb-12">
                         <h2 class="text-purple-dark text-2xl mb-6">
-                            @{{ title }}
+                            Upload File Excel
                         </h2>
                         <div class="bg-white rounded-lg p-6 md:flex lg:block box-shadow">
                             <div>
@@ -67,20 +67,15 @@
                                             <h3
                                             class="text-xl lg:text-2xl leading-normal tracking-normal font-normal">
                                             <div class="form-group">
-                                                <label for="FileSelect">File Select ( .xlsx )</label>
-                                                <div class="custom-file mb-3">
-                                                    <input type="file" class="custom-file-input" id="customFile" name="file" @change="onFileChange">
-                                                    <label class="custom-file-label" for="customFile">@{{ fileName }}</label>
-                                                </div>
+                                                <label for="FileSelect">File Select <span class="badge badge-success">.xlsx</span></label>
+                                                <upload csrf="{{ csrf_token() }}"></upload>
                                             </div>
-                                            <button type="submit" class="el-button el-button--primary">Upload</button>
                                         </h3>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </a>
-                    
                 </div>
             </div>
             <listmember v-if="auth" ref="members"></listmember>
@@ -107,12 +102,23 @@
                                             @{{ formErrors.account_id[0] }}
                                         </div>
                                         <button class="el-button el-button--primary" :class="{ 'is-disabled': !bots.infor }" :disabled="!bots.infor" type="submit">Save</button>
-                                        <button class="el-button el-button--primary" class="form-control" type="button" v-on:click="checkBot()">Check Api Key</button>
+                                        <button class="el-button el-button--primary" class="form-control" type="button" v-on:click="checkBot()">Check API</button>
                                     </form>
                                 </div>
                             </div>
+                            <el-switch
+                                v-model="bots.togroup"
+                                style="display: block"
+                                active-color="#13ce66"
+                                inactive-color="#ff4949"
+                                active-text="Send to Group active"
+                                inactive-text="Send to Account private"
+                                active-value=1
+                                inactive-value=0
+                                @change="updateToGroup"
+                            />
                         </div>
-                        <div class="col-md-4 mt-6">
+                        <div class="col-md-4">
                             <div class="card align-items-center" style="width: 18rem;">
                                 <h4 class="mt-2">Bot Information</h4>
                                 <div class="card-body">
@@ -127,6 +133,7 @@
                             </div>
                         </div>
                     </div>
+                    <listroom ref="listroom" v-show="bots.togroup == 1"></listroom>
                 </div>
             </div>
         </section>

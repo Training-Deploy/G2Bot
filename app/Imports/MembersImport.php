@@ -29,9 +29,9 @@ class MembersImport implements ToCollection, WithStartRow, WithHeadingRow, WithM
     /**
      * Validate about errors
      *
-     * @var array
+     * @var string
      */
-    private $validate = [];
+    private $validate = null;
     /**
      * Model Member
      *
@@ -66,14 +66,14 @@ class MembersImport implements ToCollection, WithStartRow, WithHeadingRow, WithM
     public function collection(Collection $rows)
     {
         if (!$this->isEmptyColumns('fullname', $rows[0])) {
-            $this->validate[] = 'Column fullname not found ! please format name column to fullname';
+            $this->validate = 'Column fullname not found ! ';
         }
         
         if (!$this->isEmptyColumns('birthday', $rows[0])) {
-            $this->validate[] = 'Column birthday not found ! please format name column to birthday';
+            $this->validate .= 'Column birthday not found !';
         }
 
-        if (count($this->validate) == 0) {
+        if (is_null($this->validate)) {
             foreach ($rows as $row) {
                 if (!$this->isEmptyRow($row['fullname']) && !$this->isEmptyRow($row['birthday'])) {
                     $this->addRowsToModel($row);

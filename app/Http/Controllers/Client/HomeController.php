@@ -28,10 +28,20 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
+        return view('clients.master');
+    }
+
+    /**
+     * Get Info Authentication
+     *
+     * @return mixed
+     */
+    public function getAuth()
+    {
+        if (Auth::check()) {
             return response()->json($this->userRepository->findWith(Auth::user()->id, ['bots']));
         }
 
-        return view('clients.master');
+        return response()->json(false);
     }
 }
