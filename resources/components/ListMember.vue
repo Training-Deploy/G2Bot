@@ -123,7 +123,10 @@
         Are you want delete records ??
       </p>
     </b-modal>
-    <div class="mx-auto container mb-12">
+    <div
+      id="membersManage"
+      class="mx-auto container mb-12"
+    >
       <h2 class="text-purple-dark text-2xl mb-6">
         Members Manage
       </h2>
@@ -193,9 +196,10 @@
 </template>
 
 <script>
-import { resolve } from 'q';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import { mixin } from '@/mixin';
+import { RepositoryFactory } from '@/factory';
+const MemberRepository = RepositoryFactory.get('member');
 
 export default {
     mixins: [mixin],
@@ -273,51 +277,30 @@ export default {
             this.selectedRow = val;
         },
         async fetchMembers () {
-            var self = this;
-            var authOptions = {
-                method: 'GET',
-                url: '/members',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                json: true,
-            };
-            var res = await axios(authOptions);
-            self.members = res.data;
+            const { data } = await MemberRepository.get();
+            this.members = data;
         },
         editSubmit () {
-            this.isLoading = true;
-            axios.patch('/members/' + this.selectedMember.id, this.selectedMember)
+            MemberRepository.edit(this.selectedMember)
                 .then((response) => {
-                    this.msg('Edit successfully', 'success');
                     this.$refs['edit-member'].hide();
-                    this.isLoading = false;
-                    resolve(response.data);
                 });
         },
         deleteSubmit (id) {
-            axios.delete('/members/' + id)
-                .then((response) => {
-                    this.msg('Delete successfully', 'success');
-                    resolve(response.data);
-                });
+            MemberRepository.delete(id);
         },
         confirmDelete () {
             this.$refs.confirm_delete.show();
         },
         multipleDelete () {
-            const self = this;
-            const listIds = self.selectedRow.map(row => row.id);
-            axios.post('/members/multipledelete', { data_del: listIds })
+            var self = this;
+            MemberRepository.deleteMultiple({
+                data_del: self.selectedRow.map(row => row.id),
+            })
                 .then((response) => {
-                    this.msg('Delete successfully', 'success');
                     self.selectedRow.map(row => {
                         this.members.data.splice(this.members.data.indexOf(row), 1);
                     });
-                    resolve(response.data);
-                })
-                .catch(() => {
-                    this.msg('Error', 'error');
                 });
         },
     },

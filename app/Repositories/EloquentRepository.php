@@ -140,4 +140,15 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         return $this->model->with($with)->get();
     }
+
+    /**
+     * Get Where
+     *
+     * @param Array $attributes
+     * @return mixed
+     */
+    public function getWhere($attributes)
+    {
+        return $this->model->where($attributes);
+    }
 }

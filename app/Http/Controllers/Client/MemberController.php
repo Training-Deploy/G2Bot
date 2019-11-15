@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Imports\MembersImport;
 use \Maatwebsite\Excel\Exceptions;
+use PhpOffice\PhpSpreadsheet\Exception;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
@@ -40,7 +41,7 @@ class MemberController extends Controller
     public function store(Request $req)
     {
         if (!Auth::check()) {
-            return response()->json(['error' => 'Please login'], 406);
+            return response()->json(['message' => 'Please login'], 422);
         }
 
         try {
@@ -48,15 +49,15 @@ class MemberController extends Controller
             $member = new MembersImport($this->memberRepository, $sheet);
             Excel::import($member, $req->file);
 
-            if (count($member->validated()) > 0) {
-                return response()->json(['error' => $member->validated()], 500);
+            if (!is_null($member->validated())) {
+                return response()->json(['message' => $member->validated()], 422);
             }
         } catch (Exceptions\SheetNotFoundException $e) {
-            return response()->json(['error' => ['Sheet ' . $sheet . ' Not found']], 406);
+            return response()->json(['message' => 'Sheet ' . $sheet . ' Not found'], 422);
         } catch (Exceptions\NoTypeDetectedException $e) {
-            return response()->json(['error' => ['File invalid']], 406);
-        } catch (ErrorException $e) {
-            return response()->json(['error' => ['Error']], 406);
+            return response()->json(['message' => 'File invalid'], 422);
+        } catch (\ErrorException $e) {
+            return response()->json(['message' => 'Please check format datetime'], 422);
         }
 
         return response()->json(
@@ -94,7 +95,7 @@ class MemberController extends Controller
         if (Auth::user()->id == $request->user_id) {
             $this->memberRepository->updateMember($id, $request->all());
 
-            return response()->json(true);
+            return response()->json(['success' => 'Updated Member !!']);
         }
     }
     
@@ -107,8 +108,9 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $result = $this->memberRepository->deleteMember($id);
-
-        return response()->json($result);
+        if ($result) {
+            return response()->json(['success' => 'Deleted Member !!']);
+        }
     }
 
 
@@ -129,6 +131,8 @@ class MemberController extends Controller
             throw new Exception($th->getMessage());
         }
 
-        return response()->json($result);
+        if ($result) {
+            return response()->json(['success' => 'Deleted Multiple Member !!']);
+        }
     }
 }
