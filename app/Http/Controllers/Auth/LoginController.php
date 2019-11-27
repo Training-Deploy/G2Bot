@@ -66,6 +66,7 @@ class LoginController extends Controller
     }
 
     /**
+     *
      * Handle login
      *
      * @param  mixed $request
