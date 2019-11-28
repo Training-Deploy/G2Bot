@@ -1,10 +1,22 @@
 project_type: php
 build:
   general_test:
-    image: framgiaciteam/php:7.3
+    image: hieunv0998/gmt-ci-laravel-workspace:latest
+    services:
+      mysql_test:
+        image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: homestead
+          MYSQL_USER: homestead
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: root
     prepare:
+      - cp .env.testing.example .env.testing
       - composer install
-      - cp .env.testing .env
+      - php artisan key:generate --env=testing
+      - php artisan config:clear
+      - framgia-ci test-connect mysql_test 3306 60
+      - php artisan migrate --database=mysql_test
       - framgia-ci run --logs
 test:
   phpcpd:

@@ -85,3 +85,20 @@ docker exec -it g2bot_workspace php artisan migrate --seed
 ```
 
 - If you want run project on your local instead of Docker, just skip all step about docker and create virtual host. And modify `.env` config of `DB_HOST`, `DB_HOST_TEST`, `REDIS_HOST` to `127.0.0.1`
+
+## TESTING
+
+- Exec to matatabi2_workspace and run code migrate table
+
+```
+docker exec -it g2bot_workspace php artisan migrate --seed --env=testing
+
+```
+- Run command to generate file coverage
+
+```
+./vendor/bin/phpunit --coverage-html coverage
+
+```
+
+You will see a new coverage folder is created and contains the html files, Open the index.html file
