@@ -102,3 +102,6 @@ docker exec -it g2bot_workspace php artisan migrate --seed --env=testing
 ```
 
 You will see a new coverage folder is created and contains the html files, Open the index.html file
+
+example
++ https://github.com/framgia/laravel-test-examples

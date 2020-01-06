@@ -39,12 +39,12 @@ test:
   phpcs:
     ignore: false
     command: echo '' | phpcs --standard=Framgia --report-checkstyle=.framgia-ci-reports/phpcs.xml --ignore=app/Supports/* app
-  phpunit:
-    ignore: false
-    command:
-      - php -dzend_extension=xdebug.so vendor/bin/phpunit
-        --coverage-clover=.framgia-ci-reports/coverage-clover.xml
-        --coverage-html=.framgia-ci-reports/coverage
+  # phpunit:
+  #   ignore: false
+  #   command:
+  #     - php -dzend_extension=xdebug.so vendor/bin/phpunit
+  #       --coverage-clover=.framgia-ci-reports/coverage-clover.xml
+  #       --coverage-html=.framgia-ci-reports/coverage
 environments:
   CHATWORK_TOKEN: $$chatwork_token
   ROOM_ID: $$room_id

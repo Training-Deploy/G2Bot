@@ -1,0 +1,74 @@
+version: 2
+jobs:
+  build_and_test:
+    docker:
+      - image: framgia/laravel-workspace
+      - image: mysql:5.7
+        environment:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DATABASE: homestead
+          MYSQL_USER: homestead
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: root
+    steps:
+      - checkout
+      - run: cp .env.testing.example .env.testing
+      # composer cache
+      - restore_cache:
+          keys:
+            - vendor-v1-{{ checksum "composer.lock" }}
+      - run:  composer install
+      - save_cache:
+          key: vendor-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      # Yarn
+      - restore_cache:
+          name: Restore yarn cache
+          keys:
+            - yarn-{{ checksum "yarn.lock" }}
+            - yarn-
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-{{ checksum "composer.json" }}
+
+      - run:
+          name: Check convention javarscript
+          command: npm run eslint
+      # run test
+      - run: php artisan key:generate --env=testing
+      - run:
+          name: Check convention PHP
+          command: phpcs --standard=Framgia app
+      - run:
+          name: Check connection database
+          command: framgia-ci test-connect 127.0.0.1 3306 60
+      - run: php artisan migrate --seed --env=testing
+      - run:
+          name: Check PhpUnit
+          command: ./vendor/bin/phpunit
+  deploy_development:
+    docker:
+      - image: framgiaciteam/deb-deploy:7.3
+    steps:
+      - checkout
+      - run:
+          name: Deploy Develop to development
+          command: dep deploy -vv
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build_and_test
+      # - hold_for_approval:
+      #     type: approval
+      #     requires:
+      #     - build_and_test
+      - deploy_development:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only: develop

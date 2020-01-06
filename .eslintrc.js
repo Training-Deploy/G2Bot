@@ -19,10 +19,8 @@ module.exports = {
     "no-new": 0,
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    "indent": [
-      "error",
-      4
-    ],
+    "template-curly-spacing" : "off",
+    indent : "off",
     "linebreak-style": [
         "error",
         "unix"
